@@ -185,6 +185,7 @@ resource "aws_route53_record" "main" {
 }
 
 resource "aws_route53_record" "alb" {
+  count   = var.alb_dns_name != "" ? 1 : 0
   zone_id = data.aws_route53_zone.main.zone_id
   name    = "alb-${var.domain_name}"
   type    = "CNAME"
@@ -222,7 +223,7 @@ resource "aws_acm_certificate_validation" "grafana" {
 }
 
 resource "aws_route53_record" "grafana" {
-  count   = var.grafana_domain != "" ? 1 : 0
+  count   = var.grafana_domain != "" && var.alb_dns_name != "" ? 1 : 0
   zone_id = data.aws_route53_zone.main.zone_id
   name    = var.grafana_domain
   type    = "CNAME"

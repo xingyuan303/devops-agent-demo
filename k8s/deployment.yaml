@@ -31,7 +31,7 @@ spec:
                 name: outline
           env:
             - name: URL
-              value: "https://outline.devops-agent.xyz"
+              value: "https://outline.abaobao.me"
             - name: PORT
               value: "3000"
             - name: FILE_STORAGE

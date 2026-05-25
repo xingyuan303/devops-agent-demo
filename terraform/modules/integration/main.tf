@@ -316,7 +316,7 @@ resource "aws_iam_role_policy" "dingtalk_bot_devops_agent" {
 # ---------------------------------------------------------------------------
 
 resource "null_resource" "devops_agent_private_connection" {
-  count = var.enable_private_connection && var.vpc_id != "" ? 1 : 0
+  count = var.enable_private_connection && var.vpc_id != "" && var.grafana_alb_dns_name != "" ? 1 : 0
 
   triggers = {
     connection_name = var.private_connection_name

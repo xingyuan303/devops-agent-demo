@@ -177,15 +177,18 @@ resource "aws_opensearch_domain" "main" {
   cluster_config {
     instance_type          = var.opensearch_instance_type
     instance_count         = var.opensearch_instance_count
-    zone_awareness_enabled = true
+    zone_awareness_enabled = var.opensearch_instance_count >= 2
 
-    zone_awareness_config {
-      availability_zone_count = 2
+    dynamic "zone_awareness_config" {
+      for_each = var.opensearch_instance_count >= 2 ? [1] : []
+      content {
+        availability_zone_count = 2
+      }
     }
   }
 
   vpc_options {
-    subnet_ids         = slice(var.data_subnet_ids, 0, 2)
+    subnet_ids         = var.opensearch_instance_count >= 2 ? slice(var.data_subnet_ids, 0, 2) : [var.data_subnet_ids[0]]
     security_group_ids = [aws_security_group.opensearch.id]
   }
 

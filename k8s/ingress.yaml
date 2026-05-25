@@ -12,11 +12,11 @@ metadata:
     alb.ingress.kubernetes.io/ssl-redirect: "443"
     # Replace with your ACM certificate ARN from: terraform output -raw acm_certificate_arn
     # Or find it: aws acm list-certificates --query "CertificateSummaryList[?DomainName=='alb-<YOUR_DOMAIN>'].CertificateArn"
-    alb.ingress.kubernetes.io/certificate-arn: "${ACM_CERTIFICATE_ARN}"
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:us-east-1:062109560346:certificate/dd876c5f-f4b3-4c90-858c-a2d38083b556"
 spec:
   rules:
     # Primary domain — matches CloudFront origin requests (Host: alb-<domain>)
-    - host: alb-outline.devops-agent.xyz
+    - host: alb-outline.abaobao.me
       http:
         paths:
           - path: /
@@ -27,7 +27,7 @@ spec:
                 port:
                   number: 80
     # Direct ALB access domain
-    - host: outline.devops-agent.xyz
+    - host: outline.abaobao.me
       http:
         paths:
           - path: /

@@ -6,7 +6,7 @@ metadata:
   name: feishu-bot
   namespace: outline
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::604179600882:role/outline-demo-eks-feishu-bot-role
+    eks.amazonaws.com/role-arn: arn:aws:iam::062109560346:role/outline-demo-eks-feishu-bot-role
 ---
 # ExternalSecret — 从 Secrets Manager 拉取飞书凭证和 Agent Space ID
 apiVersion: external-secrets.io/v1
@@ -47,7 +47,7 @@ spec:
       serviceAccountName: feishu-bot
       containers:
         - name: feishu-bot
-          image: 604179600882.dkr.ecr.us-east-1.amazonaws.com/feishu-bot:latest
+          image: 062109560346.dkr.ecr.us-east-1.amazonaws.com/feishu-bot:latest
           envFrom:
             - secretRef:
                 name: feishu-bot   # FEISHU_APP_ID, FEISHU_APP_SECRET, DEVOPS_AGENT_SPACE_ID

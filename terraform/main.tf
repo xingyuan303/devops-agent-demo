@@ -17,7 +17,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "outline-terraform-state-604179600882"
+    bucket         = "outline-terraform-state-062109560346"
     key            = "infrastructure/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "outline-terraform-locks"
@@ -153,13 +153,13 @@ module "integration" {
   route53_zone_id       = module.cdn.route53_zone_id
 
   # Grafana DevOps Agent capability
-  enable_grafana_registration = true
+  enable_grafana_registration = false
   grafana_url                 = "https://${var.grafana_host}"
   grafana_service_name        = "outline-grafana"
   grafana_sa_token_secret_arn = module.observability.grafana_sa_token_secret_arn
 
   # Private connection (VPC Lattice)
-  enable_private_connection = true
+  enable_private_connection = false
   private_connection_name = "outline-vpc-private"
   vpc_id                  = module.vpc.vpc_id
   private_subnet_ids      = module.vpc.private_subnet_ids

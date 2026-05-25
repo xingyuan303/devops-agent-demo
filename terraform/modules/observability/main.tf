@@ -48,11 +48,13 @@ resource "null_resource" "grafana_sa_token" {
 
 resource "helm_release" "kube_prometheus_stack" {
   name             = "kube-prometheus-stack"
-  repository       = "https://prometheus-community.github.io/helm-charts"
-  chart            = "kube-prometheus-stack"
+  repository       = null
+  chart            = "${path.module}/kube-prometheus-stack-72.6.2.tgz"
   version          = "72.6.2"
   namespace        = "monitoring"
   create_namespace = true
+  disable_openapi_validation = true
+  timeout          = 900
 
   set {
     name  = "grafana.enabled"

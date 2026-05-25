@@ -45,7 +45,7 @@ resource "aws_cognito_user_pool_domain" "main" {
   # NOTE: Cognito custom domains are globally unique across ALL AWS accounts.
   # If deploying to a personal account and this domain is already taken,
   # append your account ID: "${var.project_name}-auth-${data.aws_caller_identity.current.account_id}"
-  domain       = "${var.project_name}-auth"
+  domain       = "${var.project_name}-auth-062109"
   user_pool_id = aws_cognito_user_pool.main.id
 }
 
